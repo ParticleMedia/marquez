@@ -27,18 +27,7 @@ import marquez.common.models.JobName;
 import marquez.common.models.NamespaceName;
 import marquez.common.models.RunId;
 import marquez.common.models.SourceName;
-import marquez.service.ColumnLineageService;
-import marquez.service.DatasetFieldService;
-import marquez.service.DatasetService;
-import marquez.service.DatasetVersionService;
-import marquez.service.JobService;
-import marquez.service.LineageService;
-import marquez.service.NamespaceService;
-import marquez.service.OpenLineageService;
-import marquez.service.RunService;
-import marquez.service.ServiceFactory;
-import marquez.service.SourceService;
-import marquez.service.TagService;
+import marquez.service.*;
 import marquez.service.models.NodeId;
 import marquez.service.models.Run;
 
@@ -55,6 +44,7 @@ public class BaseResource {
   protected DatasetFieldService datasetFieldService;
   protected LineageService lineageService;
   protected ColumnLineageService columnLineageService;
+  protected EventPreprocessService eventPreprocessService;
 
   public BaseResource(ServiceFactory serviceFactory) {
     this.serviceFactory = serviceFactory;
@@ -69,6 +59,7 @@ public class BaseResource {
     this.datasetFieldService = serviceFactory.getDatasetFieldService();
     this.lineageService = serviceFactory.getLineageService();
     this.columnLineageService = serviceFactory.getColumnLineageService();
+    this.eventPreprocessService = serviceFactory.getEventPreprocessService();
   }
 
   void throwIfNotExists(@NonNull NamespaceName namespaceName) {

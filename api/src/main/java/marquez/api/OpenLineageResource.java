@@ -67,6 +67,7 @@ public class OpenLineageResource extends BaseResource {
   @Path("/lineage")
   public void create(@Valid @NotNull BaseEvent event, @Suspended final AsyncResponse asyncResponse)
       throws JsonProcessingException, SQLException {
+    event = eventPreprocessService.preprocess(event);
     if (event instanceof LineageEvent) {
       if (serviceFactory.getSearchService().isEnabled()) {
         serviceFactory.getSearchService().indexEvent((LineageEvent) event);
